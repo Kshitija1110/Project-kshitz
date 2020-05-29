@@ -1,0 +1,30 @@
+.Input {
+    display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+.Label {
+    font-weight: bold;
+    display: block;
+    margin: 5px 10px 5px 0;
+    
+
+    
+}
+.InputElement{   
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}
+
+.InputElement:focus{
+    outline:none;
+    background-color: lightblue;
+}
+.Invalid{
+    border: 1px solid red;
+    background-color: salmon;
+}

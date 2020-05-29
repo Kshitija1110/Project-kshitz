@@ -1,0 +1,141 @@
+
+
+.Box1{
+    height: 30%;
+    width:20%;
+    padding: 20px 0px;
+    margin-top: 120px;
+    
+    box-sizing: border-box;
+    border-radius: 5px;
+    transform: rotate(-5deg);
+    background-color: rgb(74, 74, 238);
+    
+    
+
+}
+.Box2{
+    height: 30%;
+    width:20%;
+    padding: 20px 28px;
+    margin-top: 120px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    transform: rotate(5deg);
+    background-color: gold;
+    
+
+}
+.Box3{
+    height: 30%;
+    width:20%;
+    padding: 20px 28px;
+    margin-top: 120px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    transform: rotate(-5deg);
+    background-color: lime;
+    
+
+}
+.Box4{
+    height: 30%;
+    width:20%;
+    padding: 20px 28px;
+    margin-top: 120px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    transform: rotate(5deg);
+    background-color: cyan;
+
+}
+.Box5{
+    height: 30%;
+    width:20%;
+    padding: 20px 28px;
+    margin-top: 120px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    transform: rotate(-5deg);
+    background-color: rgb(165, 38, 204);
+
+
+}
+
+.Circle{
+    
+    height: 30%;
+    width:120px;
+    padding: 20px 28px;
+    background-color: deeppink;
+    
+
+
+}
+
+.OuterCircle1, .OuterCircle2 {
+    padding:10px 15px;
+    background-color: black;
+    
+    border-radius: 100%;
+    display: inline;
+    
+
+    
+  }
+
+  .Space2{
+      padding: 8px;
+      display: inline;
+  }
+  .Space1{
+    padding: 8px;
+}
+
+  
+
+ .Box1:hover,
+ .Box2:hover,
+ .Box3:hover,
+ .Box4:hover,
+ .Box5:hover{
+    background-color: skyblue;
+}
+
+@media(max-width:900px){
+
+    .Box1,.Box2,.Box3,.Box4,.Box5{
+        width: 80px;
+        height:40px;
+    };
+    .OuterCircle1,.OuterCircle2{
+        width:40%
+    };
+    .Space2{
+        padding: 5px;
+    };
+    .Space1{
+        padding: 0;
+    }
+    
+
+}
+@media(max-width:800px){
+
+    .Box1,.Box2,.Box3,.Box4,.Box5{
+        width: 60px;
+        height:30px;
+    };
+    .OuterCircle1,.OuterCircle2{
+        width:20%
+        
+    };
+    .Space2{
+        padding: 0;
+    };
+    .Space1{
+        padding: 0;
+    }
+    
+
+}

@@ -1,0 +1,24 @@
+.Product{
+
+    float: left;
+  width: 30%;
+  padding: 5px;
+  font-family: 'Aclonica', sans-serif;
+
+}
+.Photo {
+   width: 100%;
+}
+
+.PhotoName {
+    /*margin-top: 245px;*/
+    /*padding: 0.5em;*/
+    text-align: center;
+    background-color: cyan;
+    /*background-color: #666666;*/
+}
+.Row::after {
+    content: "";
+    clear: both;
+    display: table;
+  }

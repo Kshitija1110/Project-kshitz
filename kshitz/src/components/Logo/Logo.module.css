@@ -1,0 +1,117 @@
+.Parent {
+    width:15%;
+    height:20%;
+    position: relative;
+    display:block;
+    margin-right: 200px;
+   
+  }
+  
+  
+  
+  .Oval {
+    width: 60px;
+    height: 40px;
+    background: yellow;
+    border-radius: 80px / 60px;
+    margin: auto;
+    margin-top: 6px;
+
+  }
+  
+  .LeftCircle {
+    height: 20px;
+    width: 20px;
+    border-radius: 100%;
+    background: yellow;
+    margin:auto;
+    position: absolute;
+  }
+  .RightCircle {
+    height: 20px;
+    width: 20px;
+    border-radius: 100%;
+    background: yellow;
+    margin-left:42px;
+    position: absolute;
+  }
+  
+  
+  
+  .LeftEye {
+    background: black;
+    width: 12px;
+    height: 12px;
+    margin-top: 10px;
+    margin-left: 8px;
+    border-radius: 50%;
+    position: absolute;
+  }
+  .RightEye {
+    background: black;
+    width: 12px;
+    height: 12px;
+    margin-top: 10px;
+    margin-left: 40px;
+    border-radius: 50%;
+    position: absolute;
+  }
+  
+  .Lefteye {
+    margin-left: 5px;
+  }
+  
+  .Righteye {
+    margin-left: 15px;
+  }
+  
+  .Smile {
+    width: 40px;
+    height: 12px;
+    border: solid 3px #000;
+    border-color: black transparent transparent transparent;
+    border-radius: 50%/13px 13px 0 0;
+    transform: rotate(180deg);
+    margin-left:8px;
+    position: absolute;
+    margin-top:15px;
+    
+  }
+  
+  
+  .Line {
+    background: yellow;
+    border-radius: 3px;
+    width: 6px;
+    height: 40px;
+  }
+  
+  .Horizontalline {
+    transform: rotate(90deg);
+    margin-top: -50px;
+    margin-left: 10px;
+    height: 25px;
+  }
+  
+  
+  
+  .Title {
+    width: 28px;
+    height: inherit;
+    line-height: 16px;
+    margin-left: 10px;
+    position: absolute;
+    font-weight: bold;
+    font-size: 20px;
+    float: left;
+  }
+  
+  .Titleeye {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: yellow;
+    margin-top: 4px;
+    margin-left: 20px;
+  }
+  

@@ -1,0 +1,34 @@
+.Toolbar{
+    height:30%;
+    width:100%;
+    position: fixed;
+    top:0;
+    left:0;
+    background: linear-gradient(rgb(235, 40, 40),lightCoral);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0;
+    box-sizing: border-box;
+    z-index: 90;
+
+}
+
+.Input{
+    padding:30px 10px;
+     width:40%;
+     height:10%;
+     float:right;
+     display:'block';
+     border-radius: 20px;
+     margin-right:20px;
+}
+.Toolbar nav{
+    height:100%;
+
+}
+.Logo {
+align-items: center;
+margin-right: 500px;
+}
+
+

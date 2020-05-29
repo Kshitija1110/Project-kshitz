@@ -1,0 +1,39 @@
+.Logo{
+    background: linear-gradient(rgb(235, 40, 40),lightCoral);
+    padding:10px;
+    height: 70%;
+    position:relative;
+    margin-top: 40px;
+    margin-left: 2px;
+    
+    
+}
+.Logo img{
+    height:100%;
+}
+
+
+  
+  
+  
+  
+
+
+@media(min-width: 1000px) and (min-height:700px){
+    .Burger{
+        width:700px;
+        height:600px;
+    }
+}
+@media(min-width: 500px) and (min-height:401px){
+    .Burger{
+        width:450px;
+        height:400px;
+    }
+}
+@media(min-width: 500px) and (min-height:400px){
+    .Burger{
+        width:350px;
+        height:300px;
+    }
+}

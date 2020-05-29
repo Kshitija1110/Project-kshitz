@@ -1,0 +1,8 @@
+.Cover {
+    background-image: url("/home/kshitija/kshitz/src/assets/Images/Background2.jpg");
+    background-color: #cccccc;
+    background-size: contain;
+    background: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+   }

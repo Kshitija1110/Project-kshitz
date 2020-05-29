@@ -1,0 +1,21 @@
+.Content{
+    margin-top:220px;
+    
+    
+}
+
+.Box{
+    margin: 20px auto;
+    width:80%;
+    text-align: center;
+    box-shadow: 0 2px 3px grey;
+    border: 1px solid grey;
+    padding: 10 px;
+    box-sizing: border-box;
+    }
+    
+    @media(min-width:600px){
+        .Box{
+            width: 500px;
+        }
+    }
