@@ -1,8 +1,10 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState={
-    customerData:[],
-    customerAddress:[]
+    userData:[],
+    customerAddress:[],
+    editAddressData:[],
+    sellerAddress:[]
 
 }
 
@@ -14,7 +16,7 @@ const reducer =(state=initialState,action)=>{
             return{
 
                 ...state,
-                customerData:action.data
+                userData:action.data
 
 
             };
@@ -23,6 +25,17 @@ const reducer =(state=initialState,action)=>{
                 ...state,
                 customerAddress:action.address
 
+            };
+        case actionTypes.SET_SELLER_ADDRESS:
+                return{
+                    ...state,
+                    sellerAddress:action.address
+    
+                };
+        case actionTypes.SET_EDIT_ADDRESS_DATA:
+            return{
+                ...state,
+                editAddressData:action.address
             }
 
         

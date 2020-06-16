@@ -11,3 +11,34 @@
     margin: 10px;
     font-weight: bold;
 }
+.Button2{
+    background-color: transparent;
+    border:none;
+    color: rgb(233, 67, 191);
+    margin-left:20px;
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 10px;
+    align-items: center;
+    margin: 10px;
+    font-weight: bold;
+}
+.Button3{
+    background-color: transparent;
+    border:none;
+    color: blue;
+    margin-left:20px;
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 10px;
+    align-items: center;
+    margin: 2px;
+    font-weight: bold;
+}
+
+.Button:disabled{
+    color:gray;
+    cursor: not-allowed;
+}

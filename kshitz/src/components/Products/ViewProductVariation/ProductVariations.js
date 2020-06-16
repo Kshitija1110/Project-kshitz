@@ -6,72 +6,64 @@ import classes from './ProductVariations.module.css';
 
 const ProductVariations=(props)=>{
 
-    const{onViewProductVariations,onAddToCart,productId,variationId,token,isAuthenticated,productVariation}=props;
+    const{onViewProductVariations,onAddToCart,productId,token,isAuthenticated,productVariation}=props;
 
     const[authRedirect,setAuthRedirect] = useState();
 
+    const [continueCart,setContinueCart] = useState(false);
+
 
     useEffect(()=>{
-        console.log('inside productvariations',productId);
      onViewProductVariations(productId);
 
      },[onViewProductVariations,productId]);
 
 
-     const cartHandler=()=>{
+     const cartHandler=(productVarId)=>{
 
-        console.log('inside cart handler');
         if(isAuthenticated){
-        onAddToCart(variationId,token);
+        onAddToCart(productVarId,token);
+        setContinueCart(true);
         }
         else
         {
-            console.log('else');
+          
+            props.onsetAuthRedirectPath('/product');
             setAuthRedirect(<Redirect to='/login'/>);
         }
 
         
 
      }
+     const buyProductHandler=(productId,variationId)=>{
+         props.onsetProductId(productId,variationId);
+        setAuthRedirect(<Redirect to = '/order/product'/>);
+    }
 
      let viewDetails = null;
 
-     let variationData =    Object.keys(productVariation).map(igkey=> {
-         console.log(productVariation[igkey].primaryImageName);
-         viewDetails = <div className={classes.ProductVariation}>
-                                  <img className={classes.Box} src = {require('/home/kshitija/kshitz/src/assets/Images/'+productVariation[0].primaryImageName)}/>
-                                  <strong className={classes.PhotoName}>Name: {productVariation[0].product.name}</strong>
-                                  <p>Brand: {productVariation[0].product.brand}</p>
-                                  <p>Description: {productVariation[0].product.description}</p>
-                                  <p>Price: Rs. {productVariation[0].price} /-</p>
-                                  <button className={classes.Button} onClick={()=>cartHandler()}>Add to cart</button>
-                                  <button className={classes.Button}>Buy now</button>
+      viewDetails =    Object.keys(productVariation).map(igkey=> {
+         
+         return <div className={classes.ProductVariation} key ={igkey}>
+                                  <img className={classes.Box} src = {require('/home/kshitija/kshitz/src/assets/Images/'+productVariation[igkey].primaryImageName)} alt='product variation'/>
+                                  <strong className={classes.PhotoName}>Name: {productVariation[igkey].product.name}</strong>
+                                  <p>Brand: {productVariation[igkey].product.brand}</p>
+                                  <p>Description: {productVariation[igkey].product.description}</p>
+                                  <p>Size: {productVariation[igkey].metadata.Size}</p>
+                                  <p>Colour: {productVariation[igkey].metadata.Colour}</p>
+                                  <p>Price: Rs. {productVariation[igkey].price} /-</p>
+                                  <button className={classes.Button} onClick={()=>cartHandler(productVariation[igkey].id)}>Add to cart</button>
+                                  <button className={classes.Button } onClick={()=>buyProductHandler(productVariation[igkey].product.id,productVariation[igkey].id)}>Buy now</button>
                                   
                               </div>
+     });
 
-        return [...Array(productVariation[igkey])].map(key => {  
-                 console.log(key.primaryImageName) ; 
-    
-                              console.log(true);
-                              
-                               //Object.key =>[salad]=>igkey=salad=>mapping give array inside array =>[2].map=>[2 times return burger ingredient with igkey(salad) as type]
-                    return {image:key.primaryImageName,
-                            price: key.price,
-                            name:key.product.name,
-                            description:key.product.description,
-                            brand:key.product.brand,
-                            metadata:key.metadata};
+      
 
-        });
-        
-    
-    });
-
-
-    console.log(productVariation);
-
-    
-
+        if(continueCart){
+            viewDetails = <h1>Item added to cart !!!</h1>
+        }
+  
 return(<React.Fragment>
     {authRedirect}
     {viewDetails}
@@ -95,7 +87,9 @@ const mapStateToProps=state=>{
 const mapDispatchToProps=dispatch=>{
     return{
         onViewProductVariations:(id)=>dispatch(actions.viewProductVariation(id)),
-        onAddToCart:(variationId,token)=>dispatch(actions.addToCart(variationId,token))
+        onAddToCart:(variationId,token)=>dispatch(actions.addToCart(variationId,token)),
+        onsetProductId:(productId,variationId)=>dispatch(actions.setProductId(productId,variationId)),
+        onsetAuthRedirectPath:(path)=>dispatch(actions.setAuthRedirectPath(path))
     };
 };
 

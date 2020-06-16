@@ -1,5 +1,7 @@
 import * as actionTypes from './actionTypes';
+import * as actions from './index';
 import axios from 'axios';
+
 
 export const registerSuccess=(message)=>{
     return{
@@ -16,24 +18,8 @@ export const registerFail=(error)=>{
 };
 
 export const registerCustomer=(username,firstname,middlename,lastname,email,fileupload,contact,password,confirmpassword)=>{
-
-    const customerDetails={
-            email: email,
-            firstName: firstname,
-            middleName: middlename,
-            userName: username,
-            profileImage: fileupload,
-            lastName: lastname,
-            contact: contact,
-            password: password,
-            confirmPassword: confirmpassword
-    };
-
     return dispatch=>{
-        console.log('inside dispatch');
-        console.log(email,contact);
-
-        //dispatch(registerSuccess('hi'));
+        
 
         axios.post('http://localhost:8080/register-customer',
         {
@@ -54,11 +40,10 @@ export const registerCustomer=(username,firstname,middlename,lastname,email,file
                 'Accept-Language':'german'
             }
         }).then(response=>{
-            console.log(response.data);
             dispatch(registerSuccess(response.data));
         }).catch(error=>{
-            console.log(error.response);
             dispatch(registerFail(error.response));
+            dispatch(actions.setError(error.response));
         })
 
     };
@@ -69,8 +54,6 @@ export const registerSeller=(username,firstname,middlename,lastname,email,contac
    
 
     return dispatch=>{
-        console.log('inside dispatch');
-        console.log(email,contact);
 
         axios.post('http://localhost:8080/register-seller',
         {
@@ -96,11 +79,10 @@ export const registerSeller=(username,firstname,middlename,lastname,email,contac
                 'Accept-Language':'german'
             }
         }).then(response=>{
-            console.log(response.data);
             dispatch(registerSuccess(response.data));
         }).catch(error=>{
-            console.log(error.response);
             dispatch(registerFail(error.response));
+            dispatch(actions.setError(error.response));
         })
 
     };

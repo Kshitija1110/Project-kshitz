@@ -2,7 +2,7 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState={
     loginClicked:false,
-    data:null
+    updateMessage:''
 
 }
 
@@ -13,10 +13,14 @@ const reducer =(state=initialState,action)=>{
         case actionTypes.SET_LOGINCLICKED: 
         return{
             ...state,
-            loginClicked: !state.loginClicked,
-            data:action.data
+            loginClicked: action.data
             
         };
+        case actionTypes.SET_UPDATE_MESSAGE:
+            return{
+                ...state,
+                updateMessage:action.data
+            };
         default: return state;
 
     }

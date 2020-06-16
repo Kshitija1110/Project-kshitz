@@ -1,13 +1,12 @@
 import * as actionTypes from './actionTypes';
 
-export const setLoginClicked=()=>{
+export const setLoginClicked=(data)=>{
 
-    console.log('inside set login clicked');
 
     return{
         
         type:actionTypes.SET_LOGINCLICKED,
-        data:'hello'
+        data:data
     };
 };
 
@@ -18,3 +17,10 @@ export const login=()=>{
 
     };
 }
+
+export const setUpdateMessage=(data)=>{
+    return{
+        type:actionTypes.SET_UPDATE_MESSAGE,
+        data:data
+    };
+};

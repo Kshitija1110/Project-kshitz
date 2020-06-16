@@ -2,11 +2,14 @@ import React, { Component} from 'react';
 import CustomerSignup from './SignUp/CustomerSignUp/CustomerSignUp';
 import SellerSignup from './SignUp/SellerSignup/SellerSignUp';
 import Login from './LogIn/Login';
+import {Redirect} from 'react-router-dom';
 import Button from '../../components/UI/Form/Button/Button';
 import classes from './Auth.module.css';
 import Modal from '../../components/UI/Modal/Modal';
 import * as actions from '../../reduxStore/actions/index';
 import { connect } from 'react-redux';
+
+
 
 
 class Auth extends Component{
@@ -26,7 +29,7 @@ switchSignHandler=()=>{
       };
   })
 
-  console.log(this.state.isSignUp);
+
 
 }
 switchSignUpFormHandler=()=>{
@@ -41,7 +44,7 @@ switchSignUpFormHandler=()=>{
 }
 modalHandler=()=>{
   this.setState({showModal:false});
-    this.props.onSetLoginClicked();
+    this.props.onSetLoginClicked(false);
 
   
 }
@@ -49,10 +52,11 @@ modalHandler=()=>{
 
     render(){
 
+
         let displayForm = null;
-        if(this.state.isSignUp && this.state.showModal&&this.state.isCustomer)
+        if(this.state.isSignUp && this.state.showModal&&this.state.isCustomer  && !this.props.isLogin)
         {
-            displayForm=(<Modal modalclosed={this.modalHandler}>
+            displayForm=(<div className={classes.Box}>
             <CustomerSignup/>
             <Button
              clicked={this.switchSignUpFormHandler}
@@ -61,12 +65,12 @@ modalHandler=()=>{
              clicked={this.switchSignHandler}
             btnType="Danger">Switch to {this.state.isSignUp?'LOGIN !':'SIGNUP !'}</Button>
 
-        </Modal>);
+        </div>);
         }
 
-        else if(this.state.isSignUp && this.state.showModal&& !this.state.isCustomer)
+        else if(this.state.isSignUp && this.state.showModal&& !this.state.isCustomer  && !this.props.isLogin)
         {
-            displayForm=(<Modal modalclosed={this.modalHandler}>
+            displayForm=(<form className={classes.Box}>
                 <SellerSignup/>
                 <Button
              clicked={this.switchSignUpFormHandler}
@@ -74,19 +78,22 @@ modalHandler=()=>{
                 <Button
                  clicked={this.switchSignHandler}
                 btnType="Danger">Switch to {this.state.isSignUp?'LOGIN !':'SIGNUP !'}</Button>
-                </Modal>);
+                </form>);
 
             } 
         
 
 
 
-         else if(!this.state.isSignUp && this.state.showModal)
+         else if(!this.state.isSignUp && this.state.showModal && !this.props.isLogin)
          {
-             displayForm =  <div>
+             displayForm =  <div className={classes.Box}>
                  
                  <Modal modalclosed={this.modalHandler}>
+                    
                                <Login/>
+                        
+
                          <Button
                         clicked={this.switchSignHandler}
                         btnType="Danger">Switch to {this.state.isSignUp?'LOGIN !':'SIGNUP !'}</Button>
@@ -96,9 +103,10 @@ modalHandler=()=>{
                         </div>
             
             }
-            else{
-                displayForm=<Auth/>
+            else if(this.props.isLogin){
+                displayForm = <Redirect to = {this.props.path}/>
             }
+            
             
 
 
@@ -109,6 +117,12 @@ modalHandler=()=>{
     
 }
 }
+const mapStateToProps=state=>{
+    return{
+        isLogin:state.auth.isLogin,
+        path:state.auth.authRedirectPath
+    }
+}
 
 const mapDispatchToProps=dispatch=>{
     return{
@@ -118,4 +132,4 @@ const mapDispatchToProps=dispatch=>{
     };
 };
 
-export default connect(null,mapDispatchToProps)(Auth);
+export default connect(mapStateToProps,mapDispatchToProps)(Auth);

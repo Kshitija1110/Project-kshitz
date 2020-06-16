@@ -1,10 +1,13 @@
 import * as actionTypes from '../actions/actionTypes';
 
+
 const initialState={
-    token:null,
+    token:'',
    username:null,
    error:null,
-   isLogin:false
+   isLogin:false,
+   role:'',
+   authRedirectPath:'/'
 
 }
 
@@ -25,6 +28,28 @@ const reducer =(state=initialState,action)=>{
                 error: action.error,
                 isLogin:false
             };
+
+        case actionTypes.AUTH_LOGOUT:
+        return{
+            ...state,
+            token:null,
+            isLogin:false,
+            role:null
+        };
+        case actionTypes.SET_ROLE:
+            return{
+                ...state,
+                role:action.role
+
+
+            };
+            case actionTypes.SET_AUTH_REDIRECT_PATH:
+                return{
+                    ...state,
+                    authRedirectPath:action.path
+    
+    
+                };
             default:return state;
     }
 

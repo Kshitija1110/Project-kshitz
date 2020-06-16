@@ -6,11 +6,11 @@ const modal = (props)=>{
 
     return(
         <React.Fragment>
-            <BackDrop clicked={props.modalclosed}/>
+            <BackDrop show={props.show} clicked={props.modalclosed}/>
         <div
          style={{
              transform:props.modalclosed ? 'translateY(0)' : 'translateY(-100vh)',
-             opacity:props.modalclosed ?'1' :'0'
+             opacity:props.modalclosed ?'100' :'0'
          }}
         className={classes.Modal}>
         {props.children}

@@ -12,6 +12,12 @@ import productReducer from './reduxStore/reducers/products';
 import showFieldsReducer from './reduxStore/reducers/showFields';
 import cartReducer from './reduxStore/reducers/cart';
 import accountReducer from './reduxStore/reducers/account';
+import orderReducer from './reduxStore/reducers/order';
+import categoryReducer from './reduxStore/reducers/category';
+import sellerReducer from './reduxStore/reducers/seller';
+import adminReducer from './reduxStore/reducers/admin';
+import successReducer from './reduxStore/reducers/success';
+import errorReducer from './reduxStore/reducers/error';
 import {createStore,applyMiddleware,compose,combineReducers} from 'redux';
 
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__  : null || compose;
@@ -23,7 +29,13 @@ const rootReducer= combineReducers(
     product: productReducer,
     showFields: showFieldsReducer,
     cart:cartReducer,
-    account:accountReducer
+    account:accountReducer,
+    order:orderReducer,
+    category:categoryReducer,
+    seller:sellerReducer,
+    admin:adminReducer,
+    error:errorReducer,
+    success:successReducer
   }
 )
 

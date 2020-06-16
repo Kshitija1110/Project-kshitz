@@ -2,27 +2,33 @@ import React, { useEffect,useState } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../../reduxStore/actions/index';
 import {Redirect} from 'react-router-dom';
+import classes from './ViewCart.module.css';
 
 const ViewCart = (props)=>{
 
-    const {onViewCart,token,isAuthenticated,cartData} = props;
+    const {onViewCart,token,isAuthenticated,cartData,onsetAuthRedirectPath} = props;
 
     const [isRedirect,setIsRedirect] = useState(null);
 
     useEffect(()=>{
-        console.log('cart ka useeffect');
+       
         if(isAuthenticated){
-            console.log('inside authenticated');
+           
         onViewCart(token);
         }
         else{
-            console.log('outside authenticated');
+           
+            onsetAuthRedirectPath('/cart');
             setIsRedirect(<Redirect to = '/login'/>);
             
         }
-    },[onViewCart,token,isAuthenticated]);
+    },[onViewCart,token,isAuthenticated,onsetAuthRedirectPath]);
 
-     console.log(isRedirect);
+    const checkoutHandler=()=>{
+        setIsRedirect(<Redirect to = '/order/cart'/>);
+    }
+
+   
      
      let cart=<h1>No items in cart !!!!</h1>
 
@@ -32,12 +38,11 @@ const ViewCart = (props)=>{
         const cartDetails = { ...cartData};
 
        cart =  Object.keys(cartDetails).map(igkey=>{
-            console.log(cartDetails[igkey].productVariation.primaryImageName);
-            console.log(cartDetails[igkey].quantity);
-            console.log(cartDetails[igkey].productVariation.price);
+            
              return [...Array(cartDetails[igkey])].map(key=>{  
-                 return <div>
-                   <img style={{width:'60%'}} src = {require('/home/kshitija/kshitz/src/assets/Images/'+cartDetails[igkey].productVariation.primaryImageName)}/>
+                
+                 return <div key ={igkey}>
+                   <img style={{width:'60%'}} src = {require('/home/kshitija/kshitz/src/assets/Images/'+cartDetails[igkey].productVariation.primaryImageName)} alt='cart product'/>
            <p>quantity: {cartDetails[igkey].quantity}</p>
            <strong>Price: {cartDetails[igkey].productVariation.price}</strong>
                </div>
@@ -46,7 +51,7 @@ const ViewCart = (props)=>{
         
         });
         
-        console.log(cartDetails);
+       
 
 
      }
@@ -55,7 +60,7 @@ const ViewCart = (props)=>{
     return (<div>
         {isRedirect}
         {cart}
-        <h1>This is cart</h1>
+        <button className={classes.Button3} onClick={()=>checkoutHandler()}>Checkout</button>
         </div>);
 };
 
@@ -70,7 +75,8 @@ const mapStateToProps=state=>{
 const mapDispatchToProps=dispatch=>{
     return{
 
-        onViewCart:(token)=>dispatch(actions.viewCart(token))
+        onViewCart:(token)=>dispatch(actions.viewCart(token)),
+        onsetAuthRedirectPath:(path)=>dispatch(actions.setAuthRedirectPath(path))
 
     };
 }

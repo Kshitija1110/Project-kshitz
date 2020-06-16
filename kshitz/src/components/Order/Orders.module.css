@@ -1,0 +1,11 @@
+.Box{
+    margin: 20px auto;
+    width:60%;
+    text-align: center;
+    float: left;
+    box-shadow: 0 2px 3px grey;
+    border: 1px solid grey;
+    padding: 10 px;
+    box-sizing: border-box;
+    margin-left:200px;
+    }

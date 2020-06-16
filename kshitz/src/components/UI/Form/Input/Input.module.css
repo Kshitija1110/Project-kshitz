@@ -17,12 +17,12 @@
     margin: 5px 0 22px 0;
     display: inline-block;
     border: none;
-    background: #f1f1f1;
+    background: lightblue;
 }
 
 .InputElement:focus{
     outline:none;
-    background-color: lightblue;
+    background-color: lightgreen;
 }
 .Invalid{
     border: 1px solid red;

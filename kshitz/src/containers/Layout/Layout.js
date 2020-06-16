@@ -1,16 +1,35 @@
 import React, { Component } from 'react';
 import classes from './Layout.module.css';
-import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Toolbar from '../../components/Toolbar/Toolbar';
-import Products from '../../components/Products/ViewProducts/ViewProducts';
-import Auth from '../Auth/Auth';
-import Product from '../../components/Products/ViewProducts/ViewProducts';
+import SideDrawer from '../../components/UI/SideDrawer/SideDrawer';
+
 
 
 
 class Layout extends Component{
+
+    state={
+        showSideDrawer:false
+    }; 
+
+   
+
+     sideDrawerHandler=()=>{
+      this.setState({showSideDrawer:false});
+
+    }
+
+     toggleHandler=()=>{
+        this.setState(prevstate=>{
+
+            return{
+                showSideDrawer:!prevstate.showSideDrawer
+            };
+        })
+    
+    }
 
 
     render(){
@@ -18,7 +37,8 @@ class Layout extends Component{
         
         return(
             <div >
-                <Toolbar/>
+                <Toolbar toggleClicked={this.toggleHandler}/>
+                <SideDrawer open={this.state.showSideDrawer} closed={this.sideDrawerHandler}/>
                 <main className={classes.Content}>
                     {this.props.children}
                 </main>

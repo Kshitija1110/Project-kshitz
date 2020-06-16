@@ -2,11 +2,27 @@
     margin:0;
     padding:0;
     list-style: none;
+    width: 100%;
     display: flex;
     align-items: center;
     height:100%;
     flex-flow: column;
     text-align: right;
+}
+
+.Box{
+
+    width:80%;
+    text-align: center;
+    float: left;
+    box-shadow: 0 2px 3px grey;
+    border: 1px solid grey;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: larger;
+    margin-left: 20%;
+    
+
 }
 
 @media(min-width:500px){

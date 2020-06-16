@@ -32,10 +32,10 @@ export const viewProductVariation=(id)=>{
 
     return dispatch=>{
         axios.get('http://localhost:8080/view-all-product-variation/'+id).then(response=>{
-            console.log(response.data);
+            
             dispatch(setProductVariation(response.data));
         }).catch(error=>{
-            console.log(error.response);
+           
         })
     }
 
@@ -44,10 +44,23 @@ export const viewProductVariation=(id)=>{
 export const viewProducts=(count)=>{
     return dispatch=>{
         axios.get('http://localhost:8080/view-all-products/'+count).then(response=>{
-            console.log(response.data);
+           
             dispatch(setProductData(response.data));
         }).catch(error=>{
-            console.log(error.response);
+            
+        })
+    }
+}
+
+export const showProductByCategory=(id)=>{
+
+    return dispatch=>{
+
+        axios.get('http://localhost:8080/view-product/'+id)
+        .then(response=>{
+            dispatch(setProductData(response.data));
+        }).catch(error=>{
+            
         })
     }
 }

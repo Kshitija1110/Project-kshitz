@@ -3,55 +3,51 @@ import {connect } from 'react-redux';
 import classes from './ViewProducts.module.css';
 import {Redirect } from 'react-router-dom';
 import * as actions from '../../../reduxStore/actions/index';
-import ProductVariations from '../ViewProductVariation/ProductVariations';
 import Auth from '../../../containers/Auth/Auth';
 
 
 const ViewProducts=(props)=>{
 
+    const {fromCategory,onViewProducts}=props;
 
     useEffect(()=>{
+        if(!fromCategory){
 
-        props.onViewProducts(0);
+        onViewProducts(0);
+        }
 
-    },[props.onViewProducts]);
+    },[onViewProducts,fromCategory]);
 
 
     const [count,setCount] = useState(0);
     const [isClicked,setIsClicked] = useState(false);
-    const [id,setId] = useState();
+    
 
     const imageClickHandler=(productId,variationId)=>{
         
 
-        console.log(productId)
+       
         setIsClicked(true);
         props.onsetProductId(productId,variationId);
      };
 
-   let productData = null;
+   
+   let productDetails = null;
 
 
     if(props.products && !isClicked){
         
 
-  let  productDetails =    Object.keys(props.products).map(igkey=> {
+    productDetails =    Object.keys(props.products).map(igkey=> {
         return [...Array(props.products[igkey])].map(key => {  
-                 console.log(key.primaryImageName) ;
-                 console.log(key.product.id);              //Object.key =>[salad]=>igkey=salad=>mapping give array inside array =>[2].map=>[2 times return burger ingredient with igkey(salad) as type]
-                    return <div className={classes.Product}>
-                    <img onClick={()=>imageClickHandler(key.product.id,key.id)} className={classes.Photo}  src = {require('/home/kshitija/kshitz/src/assets/Images/'+key.primaryImageName)}/>
+                
+                    return <div className={classes.Product} key ={igkey}>
+                    <img onClick={()=>imageClickHandler(key.product.id,key.id)} className={classes.Photo}  src = {require('/home/kshitija/kshitz/src/assets/Images/'+key.primaryImageName)} alt='product'/>
                     <strong>{key.product.name}</strong>
                     <p>Rs.{key.price} /-</p>
                 </div>;
         });
     });
-
-    productData = <div>
-       <marquee> <h1 style={{fontFamily:'Sigmar One, cursive'}}>Summer sale 50% off on every Product ! !</h1></marquee>
-        {productDetails}
-    </div>
-
   
   
     }
@@ -59,7 +55,6 @@ const ViewProducts=(props)=>{
     let authRedirect=null;
 
     if(isClicked){
-        console.log('inside clicked');
         authRedirect = <Redirect to ='/products/product-variation'/>
     }
 
@@ -94,11 +89,13 @@ const submitNextHandler=()=>{
 
 
     return(<div>
+        <marquee> <h1 style={{fontFamily:'Sigmar One, cursive'}}>Summer sale 50% off on every Product ! !</h1></marquee>
+        <button className={classes.Button1} onClick={submitPrevHandler}> <h3>prev</h3> </button>
         {authRedirect}
-        {productData}
+        {productDetails}
         {loginModal}
-        <button style={{padding:'10px', width:'40px', height:'40px'} } onClick={submitPrevHandler}> prev </button>
-        <button style={{padding:'10px', width:'40px', height:'40px'} } onClick={submitNextHandler}>next</button>
+        
+        <button className={classes.Button2} onClick={submitNextHandler}><h3>next</h3></button>
         </div>
     );
 

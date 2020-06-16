@@ -1,29 +1,23 @@
 import React from 'react';
 import classes from './Toolbar.module.css';
-import NavigationItems from '../Navigation/NavigationItems/NavigationItems';
 import Logo from '../Logo/Logo';
-import NavImage from '../Logo/NavImage/NavImage';
 import Train from '../Logo/Train/Train';
+import Toggle from '../UI/SideDrawer/Toggle/Toggle';
 
 
-const toolbar=(props)=>(
-<header className={classes.Toolbar}>
-<Train/>
-    <div style={{display:'block'}}>
-<Logo className={classes.Logo}/>
-<input className={classes.Input} type='text' placeholder='Search 
-here..'/>
-<div></div>
+
+const Toolbar=(props)=>{
+
+     
+    return(<header className={classes.Toolbar}>
+        <Toggle clicked={props.toggleClicked}/>
+            <Train />
+        <div className={classes.Logo}>
+<Logo />
 </div>
 
-    
-    
-    
+</header>);
+};
 
-    
-    
-    
-    
-</header>
-);
-export default toolbar;
+
+export default Toolbar;

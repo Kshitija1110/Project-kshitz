@@ -1,0 +1,99 @@
+.Button{
+    background-color: transparent;
+    border:none;
+    color: blue;
+    margin-left:20px;
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 10px;
+    align-items: center;
+    margin: 2px;
+    font-weight: bold;
+    display: block;
+    margin-left: 400px;
+    
+}
+.Product{
+
+    float: left;
+  width: 30%;
+  padding: 50px;
+  box-shadow: 0 2px 3px grey;
+  border: 1px solid black;
+  margin: 40px;
+  font-family: 'Aclonica', sans-serif;
+  display: block;
+
+}
+.Photo {
+    width: 100%;
+    float: left;
+ }
+.ProductVariation{
+
+    float: left;
+  width: 100px;
+  padding: 5px;
+  display: block;
+  box-shadow: 0 2px 3px grey;
+  border: 1px solid black;
+  font-family: 'Aclonica', sans-serif;
+
+}
+.Button2{
+    background-color: transparent;
+    border:none;
+    color: blue;
+}
+
+/* Style the tab */
+.Tab {
+  overflow: hidden;
+  background-color: black;
+}
+
+/* Style the buttons inside the tab */
+.Tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+  color:white;
+}
+
+/* Change background color of buttons on hover */
+
+/* Create an active/current tablink class */
+.Tab button:active,
+.Tab button:hover{
+  background-color: white;
+  color:black
+}
+
+.Tab button.active{
+
+    background-color: white;
+
+}
+.Active{
+
+    background-color: palevioletred;
+
+}
+
+.InActive{
+    background-color: #f1f1f1;
+}
+
+/* Style the tab content */
+.Tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}

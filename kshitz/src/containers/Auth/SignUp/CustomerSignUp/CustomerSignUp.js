@@ -4,6 +4,8 @@ import { Redirect } from 'react-router-dom';
 import Button from '../../../../components/UI/Form/Button/Button';
 import { connect } from 'react-redux';
 import * as actions from '../../../../reduxStore/actions/index';
+import { checkValidity } from '../../../../shared/utility';
+
 
 class Signup extends Component{
     state={
@@ -15,7 +17,12 @@ class Signup extends Component{
                     type:'text',
                     placeholder:'Enter your First Name'
                 },
-                value:''
+                value:'',
+                validation:{
+                    required:true
+                },
+                isValid:false,
+                touched:false
 
             },
             middlename:{
@@ -25,7 +32,12 @@ class Signup extends Component{
                     type:'text',
                     placeholder:'Enter your Middle Name'
                 },
-                value:''
+                value:'',
+                validation:{
+                    required:true
+                },
+                isValid:false,
+                touched:false
 
             },
             lastname:{
@@ -35,7 +47,12 @@ class Signup extends Component{
                     type:'text',
                     placeholder:'Enter your Last Name'
                 },
-                value:''
+                value:'',
+                validation:{
+                    required:true
+                },
+                isValid:false,
+                touched:false
 
             },
             email:{
@@ -45,7 +62,12 @@ class Signup extends Component{
                     type:'email',
                     placeholder:'Enter your Email Id'
                 },
-                value:''
+                value:'',
+                validation:{
+                    required:true
+                },
+                isValid:false,
+                touched:false
 
             },
             contact:{
@@ -55,7 +77,12 @@ class Signup extends Component{
                     type:'number',
                     placeholder:'Enter your Contact Number'
                 },
-                value:''
+                value:'',
+                validation:{
+                    required:true
+                },
+                isValid:false,
+                touched:false
 
             },
             username:{
@@ -65,7 +92,12 @@ class Signup extends Component{
                     type:'text',
                     placeholder:'Enter your username'
                 },
-                value:''
+                value:'',
+                validation:{
+                    required:true
+                },
+                isValid:false,
+                touched:false
             },
             password:{
                 elementType:'input',
@@ -74,7 +106,12 @@ class Signup extends Component{
                     type:'password',
                     placeholder:'Enter password'
                 },
-                value:''
+                value:'',
+                validation:{
+                    required:true
+                },
+                isValid:false,
+                touched:false
             },
             confirmpassword:{
                 elementType:'input',
@@ -83,7 +120,12 @@ class Signup extends Component{
                     type:'password',
                     placeholder:'Enter password again'
                 },
-                value:''
+                value:'',
+                validation:{
+                    required:true
+                },
+                isValid:false,
+                touched:false
 
             },
             fileupload:{
@@ -93,10 +135,18 @@ class Signup extends Component{
                     type:'file',
                     placeholder:'enter file path'
                 },
-                value:''
+                value:'',
+                validation:{
+                    required:true
+                    
+                },
+                isValid:false,
+                touched:false
             }
 
-        }
+        },
+        formIsValid:false,
+        passwordMatch:''
     }
 
     inputChangedHandler=(event,id)=>{
@@ -105,35 +155,31 @@ class Signup extends Component{
             [id]:{
                 ...this.state.signUpForm[id],
                 value:event.target.value,
+                isValid: checkValidity(event.target.value, this.state.signUpForm[id].validation)
                }
         };
+        let formValid=true;
+        for(let id in this.state.signUpForm){
+            formValid = this.state.signUpForm[id].isValid && formValid
+            
+             }
         this.setState({signUpForm:updatedForms});
-        console.log(this.state.signUpForm[id].value);
+        this.setState({formIsValid:formValid});
+       
     }
 
     submitHandler=(e)=>{
-        
-        console.log('inside submit handler');
-    //    const customerdetails={
-    //         email: this.state.signUpForm.email.value ,
-    //         firstName:this.state.signUpForm.firstname.value,
-    //         middleName: this.state.signUpForm.middleName.value,
-    //         userName: this.state.signUpForm.username.value,
-    //         profileImage: this.state.signUpForm.fileupload.value,
-    //         lastName: this.state.signUpForm.lastname.value,
-    //         contact:this.state.signUpForm.contact.value,
-    //         password: this.state.signUpForm.password.value,
-    //         confirmPassword: this.state.signUpForm.confirmPassword.value
-            
-    //     };
+       
 
     let fileValue = this.state.signUpForm.fileupload.value;
     let imageName = fileValue.replace(/^.*\\/, "");
-    console.log(imageName);
+    
 
-console.log(
-    this.state.signUpForm.fileupload.value
-    );
+
+
+    if(this.state.signUpForm.password.value===this.state.signUpForm.confirmpassword.value){
+
+
 
         this.props.onregisterCustomer(this.state.signUpForm.username.value,
             this.state.signUpForm.firstname.value,
@@ -144,6 +190,13 @@ console.log(
             this.state.signUpForm.contact.value,
             this.state.signUpForm.password.value,
             this.state.signUpForm.confirmpassword.value);
+
+        }
+        else{
+
+            this.setState({passwordMatch:<h2>Password and confirm password not matched !</h2>});
+
+        }
     }
 
     
@@ -158,8 +211,7 @@ console.log(
 
         let authRedirect=null;
         if(this.props.isRegistered){
-            console.log(this.props.isRegistered);
-            authRedirect=<Redirect to='/product'/>
+            authRedirect=<Redirect to='/'/>
         }
 
         let displayForm = (signupFormArray.map(loginForm=>
@@ -170,6 +222,7 @@ console.log(
             label={loginForm.config.label}/>
             ));
 
+            
 
 
         return(
@@ -177,7 +230,8 @@ console.log(
                 <h1>Please Enter Details: </h1>
                {authRedirect}
                 {displayForm}
-                <Button btnType="Success" clicked={this.submitHandler}>Submit</Button>
+                {this.state.passwordMatch}
+                <Button btnType="Success" clicked={this.submitHandler} disabled={!this.state.formIsValid}>Submit</Button>
                 
                  </div>
 
